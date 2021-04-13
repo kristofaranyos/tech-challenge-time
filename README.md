@@ -1,6 +1,6 @@
 # Pento tech challenge
 
-Thanks for taking the time to do our tech challenge. 
+Thanks for taking the time to do our tech challenge.
 
 The challenge is to build a small full stack web app, that can help a freelancer track their time.
 
@@ -24,5 +24,4 @@ You can fork this repo and use the fork as a basis for your project. We don't ha
 
 ## Notes
 
- - This is technically possible to implement only on the frontend, but please take the opportunity to show your skills on the entire stack 
- - Please focus more on code quality, building a robust service and such, than on the UI.
+- Please focus on code quality and showcasing your skills regarding the role you are applying to.
