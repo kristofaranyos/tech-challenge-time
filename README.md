@@ -7,7 +7,8 @@
 - Server config can be modified in app.properties
 - The server returns basic data, which the client can use to calculate whatever it needs (eg duration = stop - start)
 - sqlx is used instead of ORM systems, for example gorm, because I much prefer verbosity to obscurity
-- K3s was chosen because of it's simple install method and ease of use
+- K3s was chosen because of its simple install method and ease of use
+- MySQL is not persisted, but this can be easily done with persistent volumes and pv claims. It also doesn't use secret for the root password, and this one can also be fixed simply
 - Writing down every detail would take a lot of time, but I'd be glad to explain my reasons behind my decisions in the next meeting :)
 
 # Requirements
@@ -22,6 +23,7 @@ Backend:
 1. Install K3s and Docker, if you haven't already.
 2. Run `$ ./build.sh <name of your image>`. This step can be skipped if you want to use my prebuilt image
 3. Run `$ ./deploy.sh <name of your image>`. Alternatively, use `beranabus/pento-challenge` which is my prebuilt image.
+4. Give it some time (about 10-30 seconds, this is due to the fact that both MySQL and the go service gets created at the same time. MySQL takes longer to start, and by then, the go server had died because it couldn't reach it. Kubernetes will restart it in a few seconds later. This is also easy to prevent, but it's not essential for this job test.)
 
 Frontend:
 1. Import postman collection
