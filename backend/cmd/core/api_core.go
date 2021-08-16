@@ -72,7 +72,7 @@ func (c *apiCore) initRoutes() {
 }
 
 func (c *apiCore) initDB() error {
-	db, err := sqlx.Connect("mysql", fmt.Sprintf("%s:@%s(%s)/%s", c.cfg.DbUSer, c.cfg.DbPass, c.cfg.DbHost, c.cfg.DbName))
+	db, err := sqlx.Connect("mysql", fmt.Sprintf("%s:%s@(%s)/%s", c.cfg.DbUSer, c.cfg.DbPass, c.cfg.DbHost, c.cfg.DbName))
 	if err != nil {
 		return fmt.Errorf("Failed to connect to MySQL: %v", err)
 	}
