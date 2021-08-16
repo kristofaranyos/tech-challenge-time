@@ -107,7 +107,7 @@ func (sr *sessionRepository) ListSessions(ctx context.Context, token, from, to s
 		err = sr.Db.SelectContext(timoutContext, &session,
 			"select * from session where user = ? and stopped >= ? and created <= ?"+ // Everything between the dates
 				" union "+
-				"select * from session where user = ? and created between ? and ? and stopped = '0000-00-00 00:00:00'"+ // Or the creation is between the dates and the session isn't yet stopped
+				"select * from session where user = ? and created between ? and ? and stopped = '1000-01-01 00:00:00'"+ // Or the creation is between the dates and the session isn't yet stopped
 				"order by created desc",
 			token, from, to, token, from, to)
 	}

@@ -7,18 +7,21 @@
 - Server config can be modified in app.properties
 - The server returns basic data, which the client can use to calculate whatever it needs (eg duration = stop - start)
 - sqlx is used instead of ORM systems, for example gorm, because I much prefer verbosity to obscurity
+- K3s was chosen because of it's simple install method and ease of use
 - Writing down every detail would take a lot of time, but I'd be glad to explain my reasons behind my decisions in the next meeting :)
 
 # Requirements
 
-- Go 1.16.7
-- MySQL 5.7+
+- Go 1.16.7+
+- K3s v1.21.3+
+- Docker 20.10.8+
 
 # Usage
 
 Backend:
-1. `$ go build cmd/main.go`
-2. Start executable
+1. Install K3s and Docker, if you haven't already.
+2. Run `$ ./build.sh <name of your image>`. This step can be skipped if you want to use my prebuilt image
+3. Run `$ ./deploy.sh <name of your image>`. Alternatively, use `beranabus/pento-challenge` which is my prebuilt image.
 
 Frontend:
 1. Import postman collection

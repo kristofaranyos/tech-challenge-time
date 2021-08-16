@@ -63,7 +63,7 @@ func (sc *sessionController) Stop(c *gin.Context) {
 	}
 
 	// Check if already stopped
-	if session.Stopped != "0000-00-00 00:00:00" {
+	if session.Stopped != "1000-01-01 00:00:00" {
 		c.Status(http.StatusBadRequest)
 		return
 	}

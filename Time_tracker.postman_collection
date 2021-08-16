@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "06c191cd-ef12-475b-ba43-7ff3f27b36a9",
+		"_postman_id": "7f2ea512-3760-4a70-802a-5043fe13c4a4",
 		"name": "Time tracker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -33,12 +33,11 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/session/start",
+					"raw": "http://localhost/api/v1/session/start",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -74,12 +73,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/session/stop",
+					"raw": "http://localhost/api/v1/session/stop",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -115,12 +113,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/session/name",
+					"raw": "http://localhost/api/v1/session/name",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -147,12 +144,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/session/list/",
+					"raw": "http://localhost/api/v1/session/list/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -191,12 +187,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/auth/newtoken",
+					"raw": "http://localhost/api/v1/auth/newtoken",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",

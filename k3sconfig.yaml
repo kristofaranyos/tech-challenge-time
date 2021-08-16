@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pento-challenge
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pento-go-deployment
+  namespace: pento-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pento-challenge-go-deployment
+  template:
+    metadata:
+      labels:
+        app: pento-challenge-go-deployment
+    spec:
+      containers:
+        - name: pento-go-container
+          image: $IMAGE_NAME
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pento-challenge-service
+  namespace: pento-challenge
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      name: tcp
+  selector:
+    app: pento-challenge-go-deployment
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pento-challenge-ingress
+  namespace: pento-challenge
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pento-challenge-service
+                port:
+                  number: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pento-mysql-deployment
+  namespace: pento-challenge
+spec:
+  selector:
+    matchLabels:
+      app: pento-challenge-mysql-deployment
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pento-challenge-mysql-deployment
+    spec:
+      containers:
+        - image: mysql:5.7
+          name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-initdb
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mysql-initdb
+          configMap:
+            name: pento-mysql-init-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pento-mysql-init-config
+  namespace: pento-challenge
+data:
+  initdb.sql: |
+    CREATE DATABASE IF NOT EXISTS pento_challenge;
+    USE pento_challenge;
+    CREATE TABLE pento_challenge.token (token varchar(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL, created datetime NOT NULL, PRIMARY KEY (token)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    CREATE TABLE pento_challenge.session (id varchar(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL, user varchar(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL, created datetime NOT NULL, stopped datetime NOT NULL DEFAULT '1000-01-01 00:00:00', name varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '', PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pento-mysql-service
+  namespace: pento-challenge
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: pento-challenge-mysql-deployment
+  clusterIP: None

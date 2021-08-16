@@ -21,6 +21,11 @@ type ListResponse struct {
 func (l *ListResponse) Fill(session *repository.Session) {
 	l.Id = session.Id
 	l.Created = session.Created
-	l.Stopped = session.Stopped
+	if session.Stopped == "1000-01-01 00:00:00" {
+		l.Stopped = "" +
+			"0000-00-00 00:00:00"
+	} else {
+		l.Stopped = session.Stopped
+	}
 	l.Name = session.Name
 }
