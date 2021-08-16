@@ -1,3 +1,37 @@
+# Notes
+
+- Postman is used as frontend because I'm applying for the backend developer position
+- There is no login system, instead users can request a token that is used to identify them - they can only see their own sessions
+- As this is just a job test, there are some shortcuts and unfinished bits, but I tried to use the best possible practices.
+- There are some example tests. Not full coverage, but enough for you get the idea
+- Server config can be modified in app.properties
+- The server returns basic data, which the client can use to calculate whatever it needs (eg duration = stop - start)
+- sqlx is used instead of ORM systems, for example gorm, because I much prefer verbosity to obscurity
+- Writing down every detail would take a lot of time, but I'd be glad to explain my reasons behind my decisions in the next meeting :)
+
+# Requirements
+
+- Go 1.16.7
+- MySQL 5.7+
+
+# Usage
+
+Backend:
+1. `$ go build cmd/main.go`
+2. Start executable
+
+Frontend:
+1. Import postman collection
+2. Before using any endpoints, call the `Get token` endpoint to "log in"
+3. Start a session. Postman will store its uuid and use it in all next requests (stop, (re)name). Starting a session will automatically save it
+4. You can now stop, or (re)name the session.
+5. Listing usage:
+   - `/list`: All sessions
+   - `/list/day`: Last 24 hours
+   - `/list/week`: Last 7 days
+   - `/list/month`: Last 4 weeks
+
+---
 # Pento tech challenge
 
 Thanks for taking the time to do our tech challenge.
