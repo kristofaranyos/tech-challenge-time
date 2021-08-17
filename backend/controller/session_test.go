@@ -73,6 +73,7 @@ func TestSessionController_Start(t *testing.T) {
 
 // Rest of the endpoints tested in the similar manner... you get it
 // List endpoint needs very careful testing to ensure there aren't problems with boundary date values
+// Or even better, the date calculation can be refactored out as a separate function and can be tested independently
 
 func newRouter(method, path string, body io.Reader, token string) (*http.Request, *httptest.ResponseRecorder, *gin.Engine) {
 	gin.SetMode(gin.ReleaseMode)
