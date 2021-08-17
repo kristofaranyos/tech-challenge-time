@@ -13,7 +13,6 @@
 
 # Requirements
 
-- Go 1.16.7+
 - K3s v1.21.3+
 - Docker 20.10.8+
 
