@@ -22,7 +22,7 @@ Backend:
 1. Install K3s and Docker, if you haven't already.
 2. Run `$ ./build.sh <name of your image>`. This step can be skipped if you want to use my prebuilt image
 3. Run `$ ./deploy.sh <name of your image>`. Alternatively, use `beranabus/pento-challenge` which is my prebuilt image.
-4. Give it some time (about 10-30 seconds, this is due to the fact that both MySQL and the go service gets created at the same time. MySQL takes longer to start, and by then, the go server had died because it couldn't reach it. Kubernetes will restart it in a few seconds later. This is also easy to prevent, but it's not essential for this job test.)
+4. Give it some time (about 10-30 seconds, this is due to the fact that both MySQL and the go service get created at the same time. MySQL takes longer to start, and by then, the go server had died because it couldn't reach the db. Kubernetes will restart it a few seconds later. This is also easy to prevent, but it's not essential for this job test.)
 
 Frontend:
 1. Import postman collection
